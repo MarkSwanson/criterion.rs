@@ -12,8 +12,8 @@
 #![feature(collections)]
 #![feature(core)]
 #![feature(path_ext)]
-#![feature(std_misc)]
 #![feature(test)]
+#![feature(duration)]
 
 #[macro_use]
 extern crate log;
@@ -147,11 +147,9 @@ impl Criterion {
     ///
     /// Panics if the warm up time is set to a non-positive value
     pub fn warm_up_time(&mut self, dur: Duration) -> &mut Criterion {
-        let ns = dur.num_nanoseconds().expect("duration overflow");
+        let seconds = dur.secs();
 
-        assert!(ns > 0);
-
-        self.warm_up_time_ns = ns as u64;
+        self.warm_up_time_ns = seconds * 1000000;
         self
     }
 
@@ -166,11 +164,9 @@ impl Criterion {
     ///
     /// Panics if the measurement time is set to a non-positive value
     pub fn measurement_time(&mut self, dur: Duration) -> &mut Criterion {
-        let ns = dur.num_nanoseconds().expect("duration overflow");
+        let seconds = dur.secs();
 
-        assert!(ns > 0);
-
-        self.measurement_time_ns = ns as u64;
+        self.measurement_time_ns = seconds * 1000000;
         self
     }
 
