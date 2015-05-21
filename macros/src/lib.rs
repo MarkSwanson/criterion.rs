@@ -1,6 +1,7 @@
 #![deny(warnings)]
 #![feature(plugin_registrar)]
 #![feature(rustc_private)]
+#![allow(deprecated)]
 
 extern crate rustc;
 extern crate syntax;
